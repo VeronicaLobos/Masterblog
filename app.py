@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import webbrowser
 
 app = Flask(__name__)
 
-blog_posts = [
+BLOG_POSTS = [
     {'id': 1, 'author': 'John Doe', 'title': 'First Post',
      'content': 'This is my first post.'},
     {'id': 2, 'author': 'Jane Doe', 'title': 'Second Post',
@@ -12,17 +12,15 @@ blog_posts = [
 ]
 
 @app.route('/')
-def hello_world():
+def blog():
     """
     Renders the index.html template with the blog posts
     """
-    ##  return 'Hello, World!'
-    return render_template('index.html', posts=blog_posts)
+    return render_template('index.html', posts=BLOG_POSTS)
 
 
 @app.route('/add', methods=['GET', 'POST'])
-
-def add():
+def add_post():
     """
     Adds a new blog post to the list of blog posts.
 
@@ -37,25 +35,29 @@ def add():
     """
     if request.method == 'POST':
         new_post = {
-            'id': len(blog_posts) + 1,
+            'id': len(BLOG_POSTS) + 1,
             'author': request.form['author'],
             'title': request.form['title'],
             'content': request.form['content']
         }
-        blog_posts.append(new_post)
+        BLOG_POSTS.append(new_post)
+        ##  return jsonify({'message': 'Post added successfully'}), 200
         return (f"Post added successfully:\n"
-                f"{blog_posts[-1]}") ##  temp for testing
+                f"{BLOG_POSTS[-1]}") ##  temp for testing
         ##  return redirect(url_for('index'))
     return render_template('add.html')
 
 
 @app.route('/delete/<int:post_id>')
-def delete(post_id):
-    # Find the blog post with the given id and remove it from the list
-    # Redirect back to the home page
-    pass
+def delete_post(post_id):
+    global BLOG_POSTS
+    BLOG_POSTS[:] = [post for post in BLOG_POSTS if post.get('id') != post_id]
+    ##  return jsonify({'message': 'Post deleted successfully'}), 200
+    return (f"Post deleted successfully:\n"
+            f"{BLOG_POSTS}")  ##  temp for testing
+    ##  return redirect(url_for('index'))
 
-
+"""
 @app.route('/update/<int:post_id>', methods=['GET', 'POST'])
 def update(post_id):
     # Fetch the blog posts from the JSON file
@@ -67,11 +69,11 @@ def update(post_id):
     if request.method == 'POST':
     # Update the post in the JSON file
     # Redirect back to index
-        pass
 
     # Else, it's a GET request
     # So display the update.html page
     return render_template('update.html', post=post)
+"""
 
 
 if __name__ == '__main__':
