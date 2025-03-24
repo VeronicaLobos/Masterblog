@@ -10,4 +10,4 @@ template rendering, form handling, and basic CRUD (Create, Read, Update, Delete)
 
 How it looks so far:
 
-<img width="554" alt="Screenshot 2025-03-24 at 12 08 04" src="https://github.com/user-attachments/assets/dfdc3aaf-0cf1-42e7-aff7-bf05eb75afbc" />
+<img width="554" alt="Screenshot 2025-03-24 at 13 20 22" src="https://github.com/user-attachments/assets/1d14d3f2-3783-46e1-bd69-561bfee98210" />
