@@ -25,3 +25,25 @@ h1 {
 .post p {
     margin: 10px 0;
 }
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px; /* Rounded corners */
+}
+
+.button-delete{
+    background-color: #f44336; /*red*/
+}
+
+.button-update{
+    background-color: #008CBA; /*blue*/
+}

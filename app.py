@@ -1,22 +1,19 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 import webbrowser
+import time
+from functools import wraps
+import handle_json
 
 app = Flask(__name__)
 
-BLOG_POSTS = [
-    {'id': 1, 'author': 'John Doe', 'title': 'First Post',
-     'content': 'This is my first post.'},
-    {'id': 2, 'author': 'Jane Doe', 'title': 'Second Post',
-     'content': 'This is another post.'},
-    # More blog posts can go here...
-]
 
 @app.route('/')
 def blog():
     """
     Renders the index.html template with the blog posts
     """
-    return render_template('index.html', posts=BLOG_POSTS)
+    return render_template('index.html',
+                           posts=handle_json.load_posts_from_json())
 
 
 @app.route('/add', methods=['GET', 'POST'])
@@ -33,33 +30,53 @@ def add_post():
 
     !!!! Should redirect to index in the future.
     """
+    blog_posts = handle_json.load_posts_from_json()
+
     if request.method == 'POST':
-        new_post = {
-            'id': len(BLOG_POSTS) + 1,
-            'author': request.form['author'],
-            'title': request.form['title'],
-            'content': request.form['content']
-        }
-        BLOG_POSTS.append(new_post)
-        ##  return jsonify({'message': 'Post added successfully'}), 200
-        return (f"Post added successfully:\n"
-                f"{BLOG_POSTS[-1]}") ##  temp for testing
-        ##  return redirect(url_for('index'))
+        ids = [post['id'] for post in blog_posts if 'id' in post]
+
+        try:
+            new_post = {
+                'id': max(ids) + 1 if ids else 1,
+                'author': request.form['author'],
+                'title': request.form['title'],
+                'content': request.form['content']
+            }
+            blog_posts.append(new_post)
+
+            handle_json.save_posts_to_json(blog_posts)
+            return render_template('success_message.html', status='added')
+
+        except TypeError as e:
+            return f"Invalid post data, some posts do not have an ID: {e}"
+
     return render_template('add.html')
 
 
 @app.route('/delete/<int:post_id>')
 def delete_post(post_id):
-    global BLOG_POSTS
-    BLOG_POSTS[:] = [post for post in BLOG_POSTS if post.get('id') != post_id]
-    ##  return jsonify({'message': 'Post deleted successfully'}), 200
-    return (f"Post deleted successfully:\n"
-            f"{BLOG_POSTS}")  ##  temp for testing
-    ##  return redirect(url_for('index'))
+    blog_posts_before = handle_json.load_posts_from_json()
+    post_count_before = len(blog_posts_before)
+
+    if post_count_before < 1:
+        return "There are no posts to delete."
+
+    blog_posts_after = [post for post in blog_posts_before if post.get('id') != post_id]
+    post_count_after = len(blog_posts_after)
+
+    handle_json.save_posts_to_json(blog_posts_after)
+
+    if post_count_after < post_count_before:
+        # Post was successfully deleted
+        return render_template('success_message.html', status='deleted')
+    else:
+        return jsonify({'error': 'Post not found or could not be deleted.'}), 404
+
+
 
 """
 @app.route('/update/<int:post_id>', methods=['GET', 'POST'])
-def update(post_id):
+def update_post(post_id):
     # Fetch the blog posts from the JSON file
     post = fetch_post_by_id(post_id)
     if post is None:
@@ -74,7 +91,6 @@ def update(post_id):
     # So display the update.html page
     return render_template('update.html', post=post)
 """
-
 
 if __name__ == '__main__':
     webbrowser.open_new('http://127.0.0.1:5001/')

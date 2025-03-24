@@ -1,0 +1,20 @@
+[
+    {
+        "id": 2,
+        "author": "Veronica",
+        "title": "Testing handle_json.py",
+        "content": "Removed hardcoded dictionary with blog posts from app.py and added JSON database."
+    },
+    {
+        "id": 3,
+        "author": "Veronica",
+        "title": "Testing Add function with JSON",
+        "content": "Posts are now persistent"
+    },
+    {
+        "id": 4,
+        "author": "Veronica",
+        "title": "More testing",
+        "content": "Testing new id assignation and time delay to redirect"
+    }
+]

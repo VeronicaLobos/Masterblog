@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post {{ status }}</title>
+    <script>
+        setTimeout(function() {
+            window.location.href = "{{ url_for('blog') }}";
+        }, 3000); // Redirect after 3 seconds
+    </script>
+</head>
+<body>
+    <h1>Success!</h1>
+    <p>Posts {{ status }} successfully.</p>
+    <p>You will be redirected back to the index page in 3 seconds...</p>
+</body>
+</html>
