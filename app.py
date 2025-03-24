@@ -13,15 +13,39 @@ blog_posts = [
 
 @app.route('/')
 def hello_world():
+    """
+    Renders the index.html template with the blog posts
+    """
     ##  return 'Hello, World!'
     return render_template('index.html', posts=blog_posts)
 
 
 @app.route('/add', methods=['GET', 'POST'])
+
 def add():
+    """
+    Adds a new blog post to the list of blog posts.
+
+    If the request method is 'GET', it renders the 'add.html'
+    template, which contains a form for creating a new blog post.
+    If the request method is 'POST', it retrieves the author, title,
+    and content from the form data, creates a new post dictionary
+    with a unique ID, appends it to the 'blog_posts' list, and
+    returns a success message.
+
+    !!!! Should redirect to index in the future.
+    """
     if request.method == 'POST':
-        # We will fill this in the next step
-        pass
+        new_post = {
+            'id': len(blog_posts) + 1,
+            'author': request.form['author'],
+            'title': request.form['title'],
+            'content': request.form['content']
+        }
+        blog_posts.append(new_post)
+        return (f"Post added successfully:\n"
+                f"{blog_posts[-1]}") ##  temp for testing
+        ##  return redirect(url_for('index'))
     return render_template('add.html')
 
 
