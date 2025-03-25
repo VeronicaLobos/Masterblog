@@ -1,20 +1,22 @@
 [
     {
+        "id": 1,
+        "author": "John Titor",
+        "title": "First Fax",
+        "content": "\"Dear Art, \n\nI had to fax when I heard other time travelers calling in from any time past the year 2500 AD. Please let me explain. \n\nTime travel was invented in 2034. Off-shoots of certain successful fusion reactor research allowed scientists at CERN to produce the world's first contained singularity engine. \n\nThe basic design involves rotating singularities inside a magnetic field. By altering the speed and direction of rotation, you can travel both forward and backward in time...\"",
+        "date_published": "Jul 29, 1998 at 00:01",
+        "date_update": "00:00",
+        "status": "Published",
+        "likes": 0
+    },
+    {
         "id": 2,
         "author": "Veronica",
-        "title": "Testing handle_json.py",
-        "content": "Removed hardcoded dictionary with blog posts from app.py and added JSON database."
-    },
-    {
-        "id": 3,
-        "author": "Veronica",
-        "title": "Testing Add function with JSON",
-        "content": "Posts are now persistent"
-    },
-    {
-        "id": 4,
-        "author": "Veronica",
-        "title": "More testing",
-        "content": "Testing new id assignation and time delay to redirect"
+        "title": "Testing",
+        "content": "\"I drank coffee after testing :)\"",
+        "date_published": "Tue Mar 25, 2025 at 11:48",
+        "date_updated": "Tue Mar 25, 2025 at 12:12",
+        "status": "Updated",
+        "likes": 0
     }
 ]

@@ -10,6 +10,12 @@ h1 {
     color: #4F4F4F;
 }
 
+textarea {
+    width: 500px;
+    height: 200px;
+    resize: vertical;
+}
+
 .post {
     background-color: #FFF;
     border: 1px solid #DDD;
@@ -24,6 +30,10 @@ h1 {
 
 .post p {
     margin: 10px 0;
+}
+
+.post-message {
+    text-align: center;
 }
 
 .button {

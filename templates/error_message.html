@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Post {{ status }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Error {{ code }}</title>
     <script>
         setTimeout(function() {
             window.location.href = "{{ url_for('blog') }}";
@@ -10,9 +9,9 @@
     </script>
 </head>
 <body>
-    <h1>Success!</h1>
+    <h1>The action could not be completed.</h1>
     <div class="post-message">
-        <p>Posts {{ status }} successfully.</p>
+        <p>{{ message }}</p>
         <p>You will be redirected back to the index page in 3 seconds...</p>
     </div>
 </body>

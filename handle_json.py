@@ -1,5 +1,6 @@
 import json
 import os
+import datetime
 
 file_name = 'data/blog_posts.json'
 
@@ -9,10 +10,11 @@ def load_posts_from_json():
 
     """
     blog_posts = [
-        {'id': 1, 'author': 'John Doe', 'title': 'First Post',
-         'content': 'This is my first post.'},
-        {'id': 2, 'author': 'Jane Doe', 'title': 'Second Post',
-         'content': 'This is another post.'},
+        {'id': 1, 'author': 'John Titor', 'title': 'First Post',
+         'content': 'This is my first post.',
+         'date_published': 'Jul 29, 1998 at 00:01',
+         'date_updated': '00:00', 'status': 'Published',
+         'likes': 42}
     ]
 
     try:

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +11,14 @@
     <h2><a href="{{ url_for('add_post') }}" class="button">Add post</a></h2>
     {% for post in posts %}
     <div class="post">
-            <h2>{{ post['title'] }}</h2>
-            <p><em>Written by {{ post['author'] }}</em></p>
-            <p>{{ post['content'] }}</p>
-            <a href="{{ url_for('delete_post', post_id=post['id']) }}" class="button button-delete">Delete</a>
+        <h2>{{ post['title'] }}</h2>
+        <p><em>Published by {{ post['author'] }}, on {{ post['date_published'] }}</em></p>
+        <p>{{ post['content'] | replace('\n', '<br>') | safe }}</p>
+        {% if post['status'] == 'Updated' %}
+        <p><em>Updated on {{ post['date_updated'] }}</em></p>
+        {% endif %}
+        <a href="{{ url_for('delete_post', post_id=post['id']) }}" class="button button-delete">Delete</a>
+        <a href="{{ url_for('update_post', post_id=post['id']) }}" class="button button-update">Update</a>
     </div>
     {% endfor %}
 </body>
