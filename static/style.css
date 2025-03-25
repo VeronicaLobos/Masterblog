@@ -37,7 +37,7 @@ textarea {
 }
 
 .button {
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50; /*green*/
     border: none;
     color: white;
     padding: 10px 20px;
@@ -47,13 +47,20 @@ textarea {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    border-radius: 5px; /* Rounded corners */
+    border-radius: 5px;
+}
+
+.button-like{
+    background-color: #FFA2D5; /*pink*/
+    padding: 5px 20px;
 }
 
 .button-delete{
     background-color: #f44336; /*red*/
+    padding: 5px 20px;
 }
 
 .button-update{
     background-color: #008CBA; /*blue*/
+    padding: 5px 20px;
 }

@@ -17,6 +17,20 @@ def blog():
     return render_template('index.html',
                            posts=handle_json.load_posts_from_json())
 
+@app.route('/like/<int:post_id>')
+def like_post(post_id):
+    """
+
+    """
+    blog_posts = handle_json.load_posts_from_json()
+    for post in blog_posts:
+        if post.get('id') == post_id:
+            post['likes'] += 1
+            break
+
+    handle_json.save_posts_to_json(blog_posts)
+    return render_template('index.html', posts=blog_posts)
+
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_post():
@@ -45,12 +59,16 @@ def add_post():
         ids = [post['id'] for post in blog_posts if 'id' in post]
 
         try:
+            date = datetime.datetime.now().strftime('%a %b %d, %Y at %H:%M')
             new_post = {
                 'id': max(ids) + 1 if ids else 1,
                 'author': request.form['author'],
                 'title': request.form['title'],
                 'content': request.form['content'],
-                'date': datetime.datetime.now().strftime('%a %b %d, %Y at %H:%M')
+                'date_published': date,
+                'date_updated': date,
+                'status': 'Published',
+                'likes': 0
             }
             blog_posts.append(new_post)
 

@@ -7,7 +7,7 @@
         "date_published": "Jul 29, 1998 at 00:01",
         "date_update": "00:00",
         "status": "Published",
-        "likes": 0
+        "likes": 42
     },
     {
         "id": 2,
@@ -17,6 +17,6 @@
         "date_published": "Tue Mar 25, 2025 at 11:48",
         "date_updated": "Tue Mar 25, 2025 at 12:12",
         "status": "Updated",
-        "likes": 0
+        "likes": 7
     }
 ]
